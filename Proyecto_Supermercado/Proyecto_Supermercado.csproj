@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E8A05559-9766-4BB8-B91D-92F91D6A082B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Proyecto_Supermercado</RootNamespace>
+    <AssemblyName>Proyecto_Supermercado</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyChanged, Version=2.2.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.2.2.9\lib\net452\PropertyChanged.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Categorias.cs">
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriasWindow.xaml.cs">
+      <DependentUpon>CategoriasWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clientes.cs">
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientesWindow.xaml.cs">
+      <DependentUpon>ClientesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Empleados.cs">
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Empresa.cs">
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaWindow.xaml.cs">
+      <DependentUpon>FacturaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Impuestos.cs">
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImpuestosWindow.xaml.cs">
+      <DependentUpon>ImpuestosWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LineaPedidos.cs">
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803200302165_Supermercado.cs" />
+    <Compile Include="Migrations\201803200302165_Supermercado.Designer.cs">
+      <DependentUpon>201803200302165_Supermercado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Modelo\Categoria.cs" />
+    <Compile Include="Modelo\Cliente.cs" />
+    <Compile Include="Modelo\Empleado.cs" />
+    <Compile Include="Modelo\Empresa.cs" />
+    <Compile Include="Modelo\Impuesto.cs" />
+    <Compile Include="Modelo\LineaPedido.cs" />
+    <Compile Include="Modelo\Pago.cs" />
+    <Compile Include="Modelo\Pedido.cs" />
+    <Compile Include="Modelo\Producto.cs" />
+    <Compile Include="Modelo\PropiedadValidarModelo.cs" />
+    <Compile Include="Modelo\Proveedor.cs" />
+    <Compile Include="Pagos.cs">
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pedidos.cs">
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Productos.cs">
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proveedores.cs">
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresWindow.xaml.cs">
+      <DependentUpon>ProveedoresWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorios\ContextoTienda.cs" />
+    <Compile Include="Repositorios\RepositorioCategoria.cs" />
+    <Compile Include="Repositorios\RepositorioCliente.cs" />
+    <Compile Include="Repositorios\RepositorioEmpleado.cs" />
+    <Compile Include="Repositorios\RepositorioEmpresa.cs" />
+    <Compile Include="Repositorios\RepositorioGenerico.cs" />
+    <Compile Include="Repositorios\RepositorioImpuesto.cs" />
+    <Compile Include="Repositorios\RepositorioLineaPedido.cs" />
+    <Compile Include="Repositorios\RepositorioPago.cs" />
+    <Compile Include="Repositorios\RepositorioPedido.cs" />
+    <Compile Include="Repositorios\RepositorioProducto.cs" />
+    <Compile Include="Repositorios\RepositorioProveedor.cs" />
+    <Compile Include="Repositorios\UnidadTrabajo.cs" />
+    <Compile Include="Supermercado.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Supermercado.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supermercado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Supermercado.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supermercado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Supermercado.edmx</DependentUpon>
+    </Compile>
+    <Page Include="CategoriasWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ClientesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FacturaWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImpuestosWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="ProveedoresWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Migrations\201803200302165_Supermercado.resx">
+      <DependentUpon>201803200302165_Supermercado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="Supermercado.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Supermercado.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Supermercado.edmx.diagram">
+      <DependentUpon>Supermercado.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagenes\acceso.png" />
+    <Resource Include="Imagenes\categorias.png" />
+    <Resource Include="Imagenes\clientes.png" />
+    <Resource Include="Imagenes\empleados.png" />
+    <Resource Include="Imagenes\productos.png" />
+    <Resource Include="Imagenes\proveedores.png" />
+    <Resource Include="Imagenes\salir.png" />
+    <Resource Include="Imagenes\tpv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagenes\ajustes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagenes\consulta.png" />
+    <Resource Include="Imagenes\empresa.png" />
+    <Resource Include="Imagenes\impuestos.png" />
+    <Resource Include="Imagenes\pagos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Supermercado.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Supermercado.edmx</DependentUpon>
+      <LastGenOutput>Supermercado.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Supermercado.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Supermercado.edmx</DependentUpon>
+      <LastGenOutput>Supermercado.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.2.4.4\build\Fody.targets" Condition="Exists('..\packages\Fody.2.4.4\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.2.4.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.4.4\build\Fody.targets'))" />
+  </Target>
+</Project>

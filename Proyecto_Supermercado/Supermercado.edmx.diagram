@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bfd681a386b24376915086f3bf712a46" Name="Diagram1">
+        <EntityTypeShape EntityType="SupermercadoModel.Categorias" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupermercadoModel.Clientes" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupermercadoModel.Empleados" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupermercadoModel.Empresa" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupermercadoModel.Impuestos" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupermercadoModel.LineaPedidos" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupermercadoModel.Pagos" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupermercadoModel.Pedidos" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupermercadoModel.Productos" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupermercadoModel.Proveedores" Width="1.5" PointX="0.75" PointY="17.5" IsExpanded="true" />
+        <AssociationConnector Association="SupermercadoModel.FK_dbo_Productos_dbo_Categorias_categoria_categoriaId" ManuallyRouted="false" />
+        <AssociationConnector Association="SupermercadoModel.FK_dbo_Pedidos_dbo_Clientes_cliente_dni" ManuallyRouted="false" />
+        <AssociationConnector Association="SupermercadoModel.FK_dbo_Pedidos_dbo_Empleados_empleado_dni" ManuallyRouted="false" />
+        <AssociationConnector Association="SupermercadoModel.FK_dbo_Pedidos_dbo_Empresa_empresa_empresaId" ManuallyRouted="false" />
+        <AssociationConnector Association="SupermercadoModel.FK_dbo_LineaPedidos_dbo_Impuestos_impuesto_impuestoId" ManuallyRouted="false" />
+        <AssociationConnector Association="SupermercadoModel.FK_dbo_LineaPedidos_dbo_Pedidos_pedido_pedidoId" ManuallyRouted="false" />
+        <AssociationConnector Association="SupermercadoModel.FK_dbo_LineaPedidos_dbo_Productos_producto_productoId" ManuallyRouted="false" />
+        <AssociationConnector Association="SupermercadoModel.FK_dbo_Pedidos_dbo_Pagos_pago_pagoId" ManuallyRouted="false" />
+        <AssociationConnector Association="SupermercadoModel.FK_dbo_Productos_dbo_Proveedores_proveedor_cif" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

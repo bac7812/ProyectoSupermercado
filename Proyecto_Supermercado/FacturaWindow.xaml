@@ -1,0 +1,58 @@
+﻿<Window x:Class="Proyecto_Supermercado.FacturaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proyecto_Supermercado"
+        mc:Ignorable="d"
+        Title="Factura" Height="600" Width="300">
+    <Window.Resources>
+        <Style x:Key="HeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="nombreLabel" Height="30" Grid.Row="0"/>
+        <Label x:Name="direccionCiudadLabel" Height="30" Grid.Row="1"/>
+        <Label x:Name="telefonoEmailLabel" Height="30" Grid.Row="2"/>
+        <Label x:Name="cifLabel" Height="30" Grid.Row="3"/>
+
+        <DataGrid x:Name="lineaPedidosDataGrid" CanUserAddRows="False" Margin="5" ColumnHeaderStyle="{StaticResource HeaderStyle}" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="4">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Producto" Binding="{Binding Path=producto.nombre}"/>
+                <DataGridTextColumn Header="Cantidad" Binding="{Binding Path=cantidad}"/>
+                <DataGridTextColumn Header="Precio" Binding="{Binding Path=producto.precio, StringFormat=\{0\}€}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <WrapPanel Grid.Row="5">
+            <Label x:Name="impuestoLabel" Height="30"/>
+            <Label x:Name="totalLabel" Height="30"/>
+        </WrapPanel>
+
+        <Label x:Name="clienteLabel" Height="30" Grid.Row="6"/>
+        <Label x:Name="empleadoLabel" Height="30" Grid.Row="7"/>
+
+        <Label x:Name="fechaLabel" Height="30" Grid.Row="8"/>
+
+        <TextBlock x:Name="devolucionTextBlock" Margin="5,0,5,0" Grid.Row="9" TextWrapping="Wrap"/>
+
+    </Grid>
+</Window>

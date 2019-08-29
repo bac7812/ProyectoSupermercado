@@ -1,0 +1,33 @@
+﻿<Window x:Class="Proyecto_Supermercado.ImpuestosWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proyecto_Supermercado"
+        mc:Ignorable="d"
+        Title="Consultar impuestos" Height="300" Width="300">
+    <Window.Resources>
+        <Style x:Key="HeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="consultarImpuestosLabel" Content="Consultar:" Grid.Row="0"/>
+        <DataGrid x:Name="consultarImpuestosDataGrid" CanUserAddRows="False" DataContext="{Binding Source=Impuestos}" ColumnHeaderStyle="{StaticResource HeaderStyle}" AutoGenerateColumns="False" Grid.Row="1" SelectionChanged="consultarImpuestosDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tipo de impuesto" Binding="{Binding Path=tipo}"/>
+                <DataGridTextColumn Header="Número de procentaje" Binding="{Binding Path=procentaje}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+    </Grid>
+</Window>

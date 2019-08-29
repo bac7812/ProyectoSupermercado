@@ -1,0 +1,703 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SupermercadoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="categoriaId" />
+          </Key>
+          <Property Name="categoriaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="dni" />
+          </Key>
+          <Property Name="dni" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="apellidos" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ciudad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar(max)" />
+          <Property Name="email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="dni" />
+          </Key>
+          <Property Name="dni" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="apellidos" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="contrasena" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="tipoCuenta" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="empresaId" />
+          </Key>
+          <Property Name="empresaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cif" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ciudad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar(max)" />
+          <Property Name="email" Type="nvarchar(max)" />
+          <Property Name="devolucion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Impuestos">
+          <Key>
+            <PropertyRef Name="impuestoId" />
+          </Key>
+          <Property Name="impuestoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="procentaje" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LineaPedidos">
+          <Key>
+            <PropertyRef Name="lineaPedidoId" />
+          </Key>
+          <Property Name="lineaPedidoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="impuesto_impuestoId" Type="int" />
+          <Property Name="pedido_pedidoId" Type="int" />
+          <Property Name="producto_productoId" Type="int" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="pagoId" />
+          </Key>
+          <Property Name="pagoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="pedidoId" />
+          </Key>
+          <Property Name="pedidoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="fechaPedido" Type="datetime" Nullable="false" />
+          <Property Name="fechaEnvio" Type="datetime" Nullable="false" />
+          <Property Name="hora" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="cliente_dni" Type="nvarchar" MaxLength="9" />
+          <Property Name="empleado_dni" Type="nvarchar" MaxLength="9" />
+          <Property Name="empresa_empresaId" Type="int" />
+          <Property Name="pago_pagoId" Type="int" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="productoId" />
+          </Key>
+          <Property Name="productoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar(max)" />
+          <Property Name="precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="stock" Type="int" Nullable="false" />
+          <Property Name="imagen" Type="nvarchar(max)" />
+          <Property Name="categoria_categoriaId" Type="int" />
+          <Property Name="proveedor_cif" Type="nvarchar" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="cif" />
+          </Key>
+          <Property Name="cif" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ciudad" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar(max)" />
+          <Property Name="persona" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_LineaPedidos_dbo_Impuestos_impuesto_impuestoId">
+          <End Role="Impuestos" Type="Self.Impuestos" Multiplicity="0..1" />
+          <End Role="LineaPedidos" Type="Self.LineaPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Impuestos">
+              <PropertyRef Name="impuestoId" />
+            </Principal>
+            <Dependent Role="LineaPedidos">
+              <PropertyRef Name="impuesto_impuestoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LineaPedidos_dbo_Pedidos_pedido_pedidoId">
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="0..1" />
+          <End Role="LineaPedidos" Type="Self.LineaPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="pedidoId" />
+            </Principal>
+            <Dependent Role="LineaPedidos">
+              <PropertyRef Name="pedido_pedidoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LineaPedidos_dbo_Productos_producto_productoId">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="LineaPedidos" Type="Self.LineaPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="productoId" />
+            </Principal>
+            <Dependent Role="LineaPedidos">
+              <PropertyRef Name="producto_productoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pedidos_dbo_Clientes_cliente_dni">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="cliente_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pedidos_dbo_Empleados_empleado_dni">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="empleado_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pedidos_dbo_Empresa_empresa_empresaId">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="empresaId" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="empresa_empresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pedidos_dbo_Pagos_pago_pagoId">
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pagos">
+              <PropertyRef Name="pagoId" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="pago_pagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Productos_dbo_Categorias_categoria_categoriaId">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="categoriaId" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="categoria_categoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Productos_dbo_Proveedores_proveedor_cif">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="cif" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="proveedor_cif" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SupermercadoModelStoreContainer">
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Impuestos" EntityType="Self.Impuestos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineaPedidos" EntityType="Self.LineaPedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_LineaPedidos_dbo_Impuestos_impuesto_impuestoId" Association="Self.FK_dbo_LineaPedidos_dbo_Impuestos_impuesto_impuestoId">
+            <End Role="Impuestos" EntitySet="Impuestos" />
+            <End Role="LineaPedidos" EntitySet="LineaPedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LineaPedidos_dbo_Pedidos_pedido_pedidoId" Association="Self.FK_dbo_LineaPedidos_dbo_Pedidos_pedido_pedidoId">
+            <End Role="Pedidos" EntitySet="Pedidos" />
+            <End Role="LineaPedidos" EntitySet="LineaPedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LineaPedidos_dbo_Productos_producto_productoId" Association="Self.FK_dbo_LineaPedidos_dbo_Productos_producto_productoId">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="LineaPedidos" EntitySet="LineaPedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pedidos_dbo_Clientes_cliente_dni" Association="Self.FK_dbo_Pedidos_dbo_Clientes_cliente_dni">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pedidos_dbo_Empleados_empleado_dni" Association="Self.FK_dbo_Pedidos_dbo_Empleados_empleado_dni">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pedidos_dbo_Empresa_empresa_empresaId" Association="Self.FK_dbo_Pedidos_dbo_Empresa_empresa_empresaId">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pedidos_dbo_Pagos_pago_pagoId" Association="Self.FK_dbo_Pedidos_dbo_Pagos_pago_pagoId">
+            <End Role="Pagos" EntitySet="Pagos" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Productos_dbo_Categorias_categoria_categoriaId" Association="Self.FK_dbo_Productos_dbo_Categorias_categoria_categoriaId">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Productos_dbo_Proveedores_proveedor_cif" Association="Self.FK_dbo_Productos_dbo_Proveedores_proveedor_cif">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SupermercadoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="categoriaId" />
+          </Key>
+          <Property Name="categoriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_dbo_Productos_dbo_Categorias_categoria_categoriaId" FromRole="Categorias" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="dni" />
+          </Key>
+          <Property Name="dni" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ciudad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK_dbo_Pedidos_dbo_Clientes_cliente_dni" FromRole="Clientes" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="dni" />
+          </Key>
+          <Property Name="dni" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contrasena" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tipoCuenta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK_dbo_Pedidos_dbo_Empleados_empleado_dni" FromRole="Empleados" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="empresaId" />
+          </Key>
+          <Property Name="empresaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cif" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ciudad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="devolucion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK_dbo_Pedidos_dbo_Empresa_empresa_empresaId" FromRole="Empresa" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Impuestos">
+          <Key>
+            <PropertyRef Name="impuestoId" />
+          </Key>
+          <Property Name="impuestoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="procentaje" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LineaPedidos" Relationship="Self.FK_dbo_LineaPedidos_dbo_Impuestos_impuesto_impuestoId" FromRole="Impuestos" ToRole="LineaPedidos" />
+        </EntityType>
+        <EntityType Name="LineaPedidos">
+          <Key>
+            <PropertyRef Name="lineaPedidoId" />
+          </Key>
+          <Property Name="lineaPedidoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="impuesto_impuestoId" Type="Int32" />
+          <Property Name="pedido_pedidoId" Type="Int32" />
+          <Property Name="producto_productoId" Type="Int32" />
+          <NavigationProperty Name="Impuestos" Relationship="Self.FK_dbo_LineaPedidos_dbo_Impuestos_impuesto_impuestoId" FromRole="LineaPedidos" ToRole="Impuestos" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK_dbo_LineaPedidos_dbo_Pedidos_pedido_pedidoId" FromRole="LineaPedidos" ToRole="Pedidos" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_dbo_LineaPedidos_dbo_Productos_producto_productoId" FromRole="LineaPedidos" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="pagoId" />
+          </Key>
+          <Property Name="pagoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK_dbo_Pedidos_dbo_Pagos_pago_pagoId" FromRole="Pagos" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="pedidoId" />
+          </Key>
+          <Property Name="pedidoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="fechaPedido" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaEnvio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hora" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cliente_dni" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="empleado_dni" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="empresa_empresaId" Type="Int32" />
+          <Property Name="pago_pagoId" Type="Int32" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_dbo_Pedidos_dbo_Clientes_cliente_dni" FromRole="Pedidos" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_dbo_Pedidos_dbo_Empleados_empleado_dni" FromRole="Pedidos" ToRole="Empleados" />
+          <NavigationProperty Name="Empresa" Relationship="Self.FK_dbo_Pedidos_dbo_Empresa_empresa_empresaId" FromRole="Pedidos" ToRole="Empresa" />
+          <NavigationProperty Name="LineaPedidos" Relationship="Self.FK_dbo_LineaPedidos_dbo_Pedidos_pedido_pedidoId" FromRole="Pedidos" ToRole="LineaPedidos" />
+          <NavigationProperty Name="Pagos" Relationship="Self.FK_dbo_Pedidos_dbo_Pagos_pago_pagoId" FromRole="Pedidos" ToRole="Pagos" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="productoId" />
+          </Key>
+          <Property Name="productoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="stock" Type="Int32" Nullable="false" />
+          <Property Name="imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="categoria_categoriaId" Type="Int32" />
+          <Property Name="proveedor_cif" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK_dbo_Productos_dbo_Categorias_categoria_categoriaId" FromRole="Productos" ToRole="Categorias" />
+          <NavigationProperty Name="LineaPedidos" Relationship="Self.FK_dbo_LineaPedidos_dbo_Productos_producto_productoId" FromRole="Productos" ToRole="LineaPedidos" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_dbo_Productos_dbo_Proveedores_proveedor_cif" FromRole="Productos" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="cif" />
+          </Key>
+          <Property Name="cif" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ciudad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="persona" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_dbo_Productos_dbo_Proveedores_proveedor_cif" FromRole="Proveedores" ToRole="Productos" />
+        </EntityType>
+        <Association Name="FK_dbo_Productos_dbo_Categorias_categoria_categoriaId">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="categoriaId" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="categoria_categoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pedidos_dbo_Clientes_cliente_dni">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="cliente_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pedidos_dbo_Empleados_empleado_dni">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="dni" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="empleado_dni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pedidos_dbo_Empresa_empresa_empresaId">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="empresaId" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="empresa_empresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LineaPedidos_dbo_Impuestos_impuesto_impuestoId">
+          <End Role="Impuestos" Type="Self.Impuestos" Multiplicity="0..1" />
+          <End Role="LineaPedidos" Type="Self.LineaPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Impuestos">
+              <PropertyRef Name="impuestoId" />
+            </Principal>
+            <Dependent Role="LineaPedidos">
+              <PropertyRef Name="impuesto_impuestoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LineaPedidos_dbo_Pedidos_pedido_pedidoId">
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="0..1" />
+          <End Role="LineaPedidos" Type="Self.LineaPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="pedidoId" />
+            </Principal>
+            <Dependent Role="LineaPedidos">
+              <PropertyRef Name="pedido_pedidoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LineaPedidos_dbo_Productos_producto_productoId">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="LineaPedidos" Type="Self.LineaPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="productoId" />
+            </Principal>
+            <Dependent Role="LineaPedidos">
+              <PropertyRef Name="producto_productoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pedidos_dbo_Pagos_pago_pagoId">
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pagos">
+              <PropertyRef Name="pagoId" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="pago_pagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Productos_dbo_Proveedores_proveedor_cif">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="cif" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="proveedor_cif" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SupermercadoModelo" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" />
+          <EntitySet Name="Impuestos" EntityType="Self.Impuestos" />
+          <EntitySet Name="LineaPedidos" EntityType="Self.LineaPedidos" />
+          <EntitySet Name="Pagos" EntityType="Self.Pagos" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
+          <AssociationSet Name="FK_dbo_Productos_dbo_Categorias_categoria_categoriaId" Association="Self.FK_dbo_Productos_dbo_Categorias_categoria_categoriaId">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pedidos_dbo_Clientes_cliente_dni" Association="Self.FK_dbo_Pedidos_dbo_Clientes_cliente_dni">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pedidos_dbo_Empleados_empleado_dni" Association="Self.FK_dbo_Pedidos_dbo_Empleados_empleado_dni">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pedidos_dbo_Empresa_empresa_empresaId" Association="Self.FK_dbo_Pedidos_dbo_Empresa_empresa_empresaId">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LineaPedidos_dbo_Impuestos_impuesto_impuestoId" Association="Self.FK_dbo_LineaPedidos_dbo_Impuestos_impuesto_impuestoId">
+            <End Role="Impuestos" EntitySet="Impuestos" />
+            <End Role="LineaPedidos" EntitySet="LineaPedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LineaPedidos_dbo_Pedidos_pedido_pedidoId" Association="Self.FK_dbo_LineaPedidos_dbo_Pedidos_pedido_pedidoId">
+            <End Role="Pedidos" EntitySet="Pedidos" />
+            <End Role="LineaPedidos" EntitySet="LineaPedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LineaPedidos_dbo_Productos_producto_productoId" Association="Self.FK_dbo_LineaPedidos_dbo_Productos_producto_productoId">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="LineaPedidos" EntitySet="LineaPedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pedidos_dbo_Pagos_pago_pagoId" Association="Self.FK_dbo_Pedidos_dbo_Pagos_pago_pagoId">
+            <End Role="Pagos" EntitySet="Pagos" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Productos_dbo_Proveedores_proveedor_cif" Association="Self.FK_dbo_Productos_dbo_Proveedores_proveedor_cif">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SupermercadoModelStoreContainer" CdmEntityContainer="SupermercadoModelo">
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="SupermercadoModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="categoriaId" ColumnName="categoriaId" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="SupermercadoModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="dni" ColumnName="dni" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="SupermercadoModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="dni" ColumnName="dni" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="tipoCuenta" ColumnName="tipoCuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresa">
+            <EntityTypeMapping TypeName="SupermercadoModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="empresaId" ColumnName="empresaId" />
+                <ScalarProperty Name="cif" ColumnName="cif" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="devolucion" ColumnName="devolucion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Impuestos">
+            <EntityTypeMapping TypeName="SupermercadoModel.Impuestos">
+              <MappingFragment StoreEntitySet="Impuestos">
+                <ScalarProperty Name="impuestoId" ColumnName="impuestoId" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="procentaje" ColumnName="procentaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineaPedidos">
+            <EntityTypeMapping TypeName="SupermercadoModel.LineaPedidos">
+              <MappingFragment StoreEntitySet="LineaPedidos">
+                <ScalarProperty Name="lineaPedidoId" ColumnName="lineaPedidoId" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="impuesto_impuestoId" ColumnName="impuesto_impuestoId" />
+                <ScalarProperty Name="pedido_pedidoId" ColumnName="pedido_pedidoId" />
+                <ScalarProperty Name="producto_productoId" ColumnName="producto_productoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagos">
+            <EntityTypeMapping TypeName="SupermercadoModel.Pagos">
+              <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="pagoId" ColumnName="pagoId" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedidos">
+            <EntityTypeMapping TypeName="SupermercadoModel.Pedidos">
+              <MappingFragment StoreEntitySet="Pedidos">
+                <ScalarProperty Name="pedidoId" ColumnName="pedidoId" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="fechaPedido" ColumnName="fechaPedido" />
+                <ScalarProperty Name="fechaEnvio" ColumnName="fechaEnvio" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="cliente_dni" ColumnName="cliente_dni" />
+                <ScalarProperty Name="empleado_dni" ColumnName="empleado_dni" />
+                <ScalarProperty Name="empresa_empresaId" ColumnName="empresa_empresaId" />
+                <ScalarProperty Name="pago_pagoId" ColumnName="pago_pagoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="SupermercadoModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="productoId" ColumnName="productoId" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
+                <ScalarProperty Name="categoria_categoriaId" ColumnName="categoria_categoriaId" />
+                <ScalarProperty Name="proveedor_cif" ColumnName="proveedor_cif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="SupermercadoModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="cif" ColumnName="cif" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="persona" ColumnName="persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
